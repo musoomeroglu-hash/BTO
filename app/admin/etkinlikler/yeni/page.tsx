@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import EtkinlikForm from '@/components/admin/EtkinlikForm'
 
 export default function YeniEtkinlikPage() {

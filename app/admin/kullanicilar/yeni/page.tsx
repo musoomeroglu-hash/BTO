@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import KullaniciForm from '@/components/admin/KullaniciForm'
 import { prisma } from '@/lib/prisma'
 

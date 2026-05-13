@@ -339,21 +339,165 @@ async function main() {
   }
   console.log('✓ STE Kategorileri oluşturuldu')
 
-  // STE Kurul Üyeleri (ilk 3 kategori için)
+  // STE Kurul Üyeleri
   const kurulData = [
+    { kategoriSlug: 'acil-tip', members: [
+      { name: 'Prof. Dr. Sercan Yılmaz', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Elif Kaya', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'adli-tip', members: [
+      { name: 'Prof. Dr. Murat Çetin', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Seda Arslan', title: 'Doç. Dr.', institution: 'Bursa Adli Tıp Kurumu', order: 2 },
+    ]},
+    { kategoriSlug: 'aile-hekimligi-ste', members: [
+      { name: 'Uzm. Dr. Hülya Şahin', title: 'Uzm. Dr.', institution: 'Bursa 1 No\'lu ASM', order: 1 },
+      { name: 'Uzm. Dr. Kemal Polat', title: 'Uzm. Dr.', institution: 'Nilüfer Aile Sağlığı Merkezi', order: 2 },
+    ]},
+    { kategoriSlug: 'anesteziyoloji', members: [
+      { name: 'Prof. Dr. Gülden Akdağ', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Tarık Uslu', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
     { kategoriSlug: 'cocuk-sagligi', members: [
       { name: 'Prof. Dr. Ayşe Kara', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
       { name: 'Doç. Dr. Mehmet Yıldız', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
       { name: 'Uzm. Dr. Fatma Demir', title: 'Uzm. Dr.', institution: 'Bursa Çekirge Devlet Hastanesi', order: 3 },
     ]},
-    { kategoriSlug: 'ic-hastaliklari', members: [
-      { name: 'Prof. Dr. Ali Özkan', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
-      { name: 'Prof. Dr. Zeynep Acar', title: 'Prof. Dr.', institution: 'Bursa Yüksek İhtisas Hastanesi', order: 2 },
+    { kategoriSlug: 'cocuk-cerrahisi', members: [
+      { name: 'Prof. Dr. Bülent Narin', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Zehra Güneş', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'dermatoloji', members: [
+      { name: 'Prof. Dr. Nilgün Atakan', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Özlem Yücel', title: 'Doç. Dr.', institution: 'Bursa Yüksek İhtisas Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'enfeksiyon-hastaliklari', members: [
+      { name: 'Prof. Dr. Emel Yılmaz', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Caner Aktaş', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'farmakoloji', members: [
+      { name: 'Prof. Dr. İbrahim Özdemir', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Arzu Yıldırım', title: 'Doç. Dr.', institution: 'Bursa Yüksek İhtisas Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'fizik-tedavi', members: [
+      { name: 'Prof. Dr. Nesrin Demirsoy', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Selim Öner', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
     ]},
     { kategoriSlug: 'genel-cerrahi', members: [
       { name: 'Prof. Dr. Hasan Çelik', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
       { name: 'Doç. Dr. Emre Toprak', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
       { name: 'Uzm. Dr. Selin Korkmaz', title: 'Uzm. Dr.', institution: 'Medicana Hastanesi', order: 3 },
+    ]},
+    { kategoriSlug: 'genetik', members: [
+      { name: 'Prof. Dr. Hüseyin Onay', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Filiz Yılmaz', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'gogus-hastaliklari', members: [
+      { name: 'Prof. Dr. Oya İtil', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Tuncay Göksel', title: 'Doç. Dr.', institution: 'Bursa Yüksek İhtisas Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'gogus-cerrahisi', members: [
+      { name: 'Prof. Dr. Kutsal Turhan', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Adem Güngör', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'goz-hastaliklari', members: [
+      { name: 'Prof. Dr. Bülent Yılmaz', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Aysun Apaydın', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'halk-sagligi-ste', members: [
+      { name: 'Prof. Dr. Reyhan Uçku', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Levent Akın', title: 'Doç. Dr.', institution: 'Bursa İl Sağlık Müdürlüğü', order: 2 },
+    ]},
+    { kategoriSlug: 'ic-hastaliklari', members: [
+      { name: 'Prof. Dr. Ali Özkan', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Prof. Dr. Zeynep Acar', title: 'Prof. Dr.', institution: 'Bursa Yüksek İhtisas Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'immunoloji', members: [
+      { name: 'Prof. Dr. Cengiz Kırkpınar', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Sibel Nacar', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'kadin-hastaliklari', members: [
+      { name: 'Prof. Dr. Meral Saraçoğlu', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Ahmet Kaya', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'kalp-damar-cerrahisi', members: [
+      { name: 'Prof. Dr. Osman Tansel', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Volkan Yüksel', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'kardiyoloji', members: [
+      { name: 'Prof. Dr. Uğur Önsel Türk', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Tuncay Güçlü', title: 'Doç. Dr.', institution: 'Bursa Yüksek İhtisas Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'klinik-biyokimya', members: [
+      { name: 'Prof. Dr. Osman Değer', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Sema Ünlüer', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'klinik-mikrobiyoloji', members: [
+      { name: 'Prof. Dr. Beyza Ener', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Nihal Akçay', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'kulak-burun-bogaz', members: [
+      { name: 'Prof. Dr. Orhan Özturan', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Bülent Şerbetçioğlu', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'noroloji', members: [
+      { name: 'Prof. Dr. Şule Özbilen Acar', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Yaşar Kütükçü', title: 'Doç. Dr.', institution: 'Bursa Yüksek İhtisas Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'norosirurji', members: [
+      { name: 'Prof. Dr. Gökmen Kahiloğulları', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Murat Akar', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'nukleer-tip', members: [
+      { name: 'Prof. Dr. Mehmet Erdoğan', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Ayşen Berk', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'ortopedi', members: [
+      { name: 'Prof. Dr. Reha Tandoğan', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Muzaffer Sindel', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'patoloji', members: [
+      { name: 'Prof. Dr. Nesrin Uğraş', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Sema Hücümenoğlu', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'plastik-cerrahi', members: [
+      { name: 'Prof. Dr. Ufuk Emekli', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Erhan Ece', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'psikiyatri', members: [
+      { name: 'Prof. Dr. Hüseyin Güleç', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Ayşegül Özel', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'radyasyon-onkolojisi', members: [
+      { name: 'Prof. Dr. Sedat Koca', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Murat Dinçer', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'radyoloji', members: [
+      { name: 'Prof. Dr. Ahmet Mesut Onat', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Işıl Başara', title: 'Doç. Dr.', institution: 'Bursa Yüksek İhtisas Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'uroloji', members: [
+      { name: 'Prof. Dr. Ertuğrul Şefik', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Cem Akbal', title: 'Doç. Dr.', institution: 'Bursa Şehir Hastanesi', order: 2 },
+    ]},
+    { kategoriSlug: 'anatomi', members: [
+      { name: 'Prof. Dr. Ömer Faruk Gökalp', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Selda Demirci', title: 'Doç. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 2 },
+    ]},
+    { kategoriSlug: 'biyofizik', members: [
+      { name: 'Prof. Dr. Yusuf Yıldız', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Tülin Ural', title: 'Doç. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 2 },
+    ]},
+    { kategoriSlug: 'biyoistatistik', members: [
+      { name: 'Prof. Dr. Necdet Süt', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Güzin Zeren Öztürk', title: 'Doç. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 2 },
+    ]},
+    { kategoriSlug: 'histoloji-embriyoloji', members: [
+      { name: 'Prof. Dr. Gülnur Ercan', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Doç. Dr. Sibel Güldiken', title: 'Doç. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 2 },
+    ]},
+    { kategoriSlug: 'tip-tarihi-deontoloji', members: [
+      { name: 'Prof. Dr. Şükrü Öztürk', title: 'Prof. Dr.', institution: 'Uludağ Üniversitesi Tıp Fakültesi', order: 1 },
+      { name: 'Dr. Ahmet Yılmaz', title: 'Dr.', institution: 'BTO Etik Kurulu', order: 2 },
     ]},
   ]
 
@@ -369,22 +513,158 @@ async function main() {
 
   // STE Materyaller
   const materyalData = [
+    { kategoriSlug: 'acil-tip', items: [
+      { title: 'Acil Tıp Protokolleri El Kitabı 2026', type: 'KITAP', author: 'BTO Acil Tıp Kurulu', description: 'Acil serviste sık karşılaşılan durumların güncel yönetim algoritmaları.' },
+      { title: 'Politravma Hastasına Yaklaşım', type: 'YAYIN', author: 'Prof. Dr. Sercan Yılmaz', description: 'Çoklu travma vakalarında ilk değerlendirme ve stabilizasyon.' },
+      { title: 'Kardiyak Arrest Yönetimi — ALS Rehberi', type: 'YAYIN', author: 'BTO STE Komisyonu', description: 'İleri kardiyak yaşam desteği güncel protokolleri.' },
+    ]},
+    { kategoriSlug: 'adli-tip', items: [
+      { title: 'Adli Tıp Uygulamaları Rehberi', type: 'KITAP', author: 'Prof. Dr. Murat Çetin', description: 'Adli olgularda tanı, raporlama ve yasal süreçler.' },
+      { title: 'Cinsel Saldırı Olgularında Adli Yaklaşım', type: 'YAYIN', author: 'Doç. Dr. Seda Arslan', description: 'Kanıt toplama, muayene ve belgeleme protokolleri.' },
+    ]},
+    { kategoriSlug: 'aile-hekimligi-ste', items: [
+      { title: 'Birinci Basamakta Kronik Hastalık Yönetimi', type: 'KITAP', author: 'BTO Aile Hekimliği Kurulu', description: 'HT, DM, KOAH ve kalp yetmezliği birinci basamak rehberi.' },
+      { title: 'Koruyucu Hekimlik ve Aşılama Takvimi 2026', type: 'YAYIN', author: 'Uzm. Dr. Hülya Şahin', description: 'Erişkin ve çocuk aşı takvimi güncellemeleri.' },
+    ]},
+    { kategoriSlug: 'anesteziyoloji', items: [
+      { title: 'Perioperatif Hasta Yönetimi Kılavuzu', type: 'KITAP', author: 'Prof. Dr. Gülden Akdağ', description: 'Preoperatif değerlendirmeden taburculuğa kadar güncel protokoller.' },
+      { title: 'Zor Havayolu Yönetimi', type: 'YAYIN', author: 'Doç. Dr. Tarık Uslu', description: 'Algoritma tabanlı zor entübasyon ve havayolu güvencesi.' },
+      { title: 'Regional Anestezi Teknikleri Atlası', type: 'KITAP', author: 'BTO Anestezi Kurulu', description: 'USG eşliğinde sinir bloklarında pratik rehber.' },
+    ]},
     { kategoriSlug: 'cocuk-sagligi', items: [
       { title: 'Pediatrik Acil Durumlar El Kitabı', type: 'KITAP', author: 'Prof. Dr. Ayşe Kara', description: 'Çocuklarda sık karşılaşılan acil durumların yönetimi.' },
       { title: 'Çocukluk Çağı Aşıları Güncel Rehber 2026', type: 'YAYIN', author: 'BTO STE Komisyonu', description: 'Türkiye ulusal aşı takvimi ve güncel öneriler.' },
       { title: 'Neonatal Resüsitasyon Protokolü', type: 'YAYIN', author: 'Doç. Dr. Mehmet Yıldız', description: 'Yenidoğan resüsitasyonunda güncel algoritmalar.' },
     ]},
-    { kategoriSlug: 'ic-hastaliklari', items: [
-      { title: 'İç Hastalıkları Tanı ve Tedavi Kılavuzu', type: 'KITAP', author: 'Prof. Dr. Ali Özkan', description: 'Dahili hastalıklarda kanıta dayalı tedavi yaklaşımları.' },
-      { title: 'Diyabet Yönetimi 2026 Güncelleme', type: 'YAYIN', author: 'Prof. Dr. Zeynep Acar', description: 'Tip 2 diyabet tedavisinde yeni ajanlar ve yaşam tarzı müdahaleleri.' },
+    { kategoriSlug: 'cocuk-cerrahisi', items: [
+      { title: 'Pediatrik Cerrahi Aciller Kılavuzu', type: 'KITAP', author: 'Prof. Dr. Bülent Narin', description: 'Çocuklarda apandisit, intussusepsiyon ve cerrahi acillerin yönetimi.' },
+      { title: 'Minimal İnvaziv Pediatrik Cerrahi', type: 'YAYIN', author: 'Doç. Dr. Zehra Güneş', description: 'Laparoskopik ve torakoskopik çocuk cerrahisi güncel yaklaşımlar.' },
+    ]},
+    { kategoriSlug: 'dermatoloji', items: [
+      { title: 'Dermatoloji Atlas: Sık Görülen Hastalıklar', type: 'KITAP', author: 'Prof. Dr. Nilgün Atakan', description: 'Klinik fotoğraflarla dermatit, psöriyazis ve melanom ayırıcı tanısı.' },
+      { title: 'Dermoskopi Temel Eğitim Materyali', type: 'YAYIN', author: 'Doç. Dr. Özlem Yücel', description: 'Pigmente lezyonların dermoskopik değerlendirilmesi.' },
+      { title: 'Biyolojik Tedaviler — Dermatoloji', type: 'YAYIN', author: 'BTO Dermatoloji Kurulu', description: 'Psöriyazis ve atopik dermatitin biyolojik ajanlarla yönetimi.' },
+    ]},
+    { kategoriSlug: 'enfeksiyon-hastaliklari', items: [
+      { title: 'Antibiyotik Kullanım Rehberi 2026', type: 'KITAP', author: 'Prof. Dr. Emel Yılmaz', description: 'Sık enfeksiyonlarda ampirik ve hedefe yönelik antibiyotik seçimi.' },
+      { title: 'Sepsis ve Septik Şok Yönetimi', type: 'YAYIN', author: 'Doç. Dr. Caner Aktaş', description: 'Surviving Sepsis Campaign güncel öneriler ve Türkiye verileri.' },
+    ]},
+    { kategoriSlug: 'farmakoloji', items: [
+      { title: 'Klinik Farmakoloji El Kitabı', type: 'KITAP', author: 'Prof. Dr. İbrahim Özdemir', description: 'İlaç etkileşimleri, doz ayarlamaları ve farmakovigilans.' },
+      { title: 'Yaşlıda Polifarmasi Yönetimi', type: 'YAYIN', author: 'Doç. Dr. Arzu Yıldırım', description: 'Geriatrik hastalarda ilaç güvenliği ve deprescrıbing rehberi.' },
+    ]},
+    { kategoriSlug: 'fizik-tedavi', items: [
+      { title: 'Kas-İskelet Rehabilitasyonu Kılavuzu', type: 'KITAP', author: 'Prof. Dr. Nesrin Demirsoy', description: 'Omuz, diz ve bel problemlerinde kanıta dayalı tedavi protokolleri.' },
+      { title: 'Kronik Ağrı Yönetimi', type: 'YAYIN', author: 'Doç. Dr. Selim Öner', description: 'Multidisipliner yaklaşım ve girişimsel ağrı tedavisi.' },
     ]},
     { kategoriSlug: 'genel-cerrahi', items: [
       { title: 'Laparoskopik Cerrahi Atlas', type: 'KITAP', author: 'Prof. Dr. Hasan Çelik', description: 'Minimal invaziv cerrahi tekniklerin görsel rehberi.' },
       { title: 'Cerrahi Yara Bakımı Protokolleri', type: 'YAYIN', author: 'Doç. Dr. Emre Toprak', description: 'Postoperatif yara bakımında güncel yaklaşımlar.' },
+      { title: 'Kolorektal Kanser Tarama Rehberi', type: 'YAYIN', author: 'BTO Cerrahi Kurulu', description: 'Kolorektal kanserin erken tanısı ve cerrahi tedavisi.' },
+    ]},
+    { kategoriSlug: 'genetik', items: [
+      { title: 'Tıbbi Genetik Danışmanlık Rehberi', type: 'KITAP', author: 'Prof. Dr. Hüseyin Onay', description: 'Genetik hastalıklarda tanı, risk hesaplama ve aile danışmanlığı.' },
+      { title: 'NGS ve Genomik Tıp Uygulamaları', type: 'YAYIN', author: 'Doç. Dr. Filiz Yılmaz', description: 'Yeni nesil dizileme teknolojileri ve klinik yorumlama.' },
+    ]},
+    { kategoriSlug: 'gogus-hastaliklari', items: [
+      { title: 'KOAH Yönetimi GOLD 2026 Güncellemesi', type: 'YAYIN', author: 'Prof. Dr. Oya İtil', description: 'Kronik obstrüktif akciğer hastalığında güncel tanı ve tedavi.' },
+      { title: 'Astım Kontrol Rehberi', type: 'KITAP', author: 'BTO Göğüs Hastalıkları Kurulu', description: 'Astım basamak tedavisi ve biyolojik tedavi seçimi.' },
+    ]},
+    { kategoriSlug: 'gogus-cerrahisi', items: [
+      { title: 'Torakoskopik Cerrahi Temel Eğitim', type: 'KITAP', author: 'Prof. Dr. Kutsal Turhan', description: 'VATS teknikleri, akciğer rezeksiyonu ve mediastinoskopi.' },
+      { title: 'Akciğer Kanseri Multidisipliner Yaklaşım', type: 'YAYIN', author: 'Doç. Dr. Adem Güngör', description: 'Evreleme, rezektabilite ve adjuvan tedavi kararları.' },
+    ]},
+    { kategoriSlug: 'goz-hastaliklari', items: [
+      { title: 'Retinal Hastalıklar Tanı Atlası', type: 'KITAP', author: 'Prof. Dr. Bülent Yılmaz', description: 'DRİ, AMD, retinal ven tıkanıklıklarının görüntüleme ve tedavisi.' },
+      { title: 'Katarakt Cerrahisi Komplikasyon Yönetimi', type: 'YAYIN', author: 'Doç. Dr. Aysun Apaydın', description: 'Fakoemülsifikasyon komplikasyonları ve yönetim protokolleri.' },
+    ]},
+    { kategoriSlug: 'halk-sagligi-ste', items: [
+      { title: 'Epidemiyoloji Araştırma Yöntemleri', type: 'KITAP', author: 'Prof. Dr. Reyhan Uçku', description: 'Kesitsel, kohort ve vaka-kontrol çalışmalarında metodoloji.' },
+      { title: 'Aşı Güvenliliği ve Halk Sağlığı', type: 'YAYIN', author: 'Doç. Dr. Levent Akın', description: 'Aşı kararsızlığıyla mücadele ve iletişim stratejileri.' },
+    ]},
+    { kategoriSlug: 'ic-hastaliklari', items: [
+      { title: 'İç Hastalıkları Tanı ve Tedavi Kılavuzu', type: 'KITAP', author: 'Prof. Dr. Ali Özkan', description: 'Dahili hastalıklarda kanıta dayalı tedavi yaklaşımları.' },
+      { title: 'Diyabet Yönetimi 2026 Güncelleme', type: 'YAYIN', author: 'Prof. Dr. Zeynep Acar', description: 'Tip 2 diyabet tedavisinde yeni ajanlar ve yaşam tarzı müdahaleleri.' },
+    ]},
+    { kategoriSlug: 'immunoloji', items: [
+      { title: 'Otoimmün Hastalıklarda Güncel Tedaviler', type: 'KITAP', author: 'Prof. Dr. Cengiz Kırkpınar', description: 'Romatoid artrit, SLE ve vaskülit biyolojik tedavi rehberi.' },
+      { title: 'Primer İmmün Yetmezlik Tanı Rehberi', type: 'YAYIN', author: 'Doç. Dr. Sibel Nacar', description: 'Erişkin ve çocuklarda immün yetmezlik tanı algoritmaları.' },
+    ]},
+    { kategoriSlug: 'kadin-hastaliklari', items: [
+      { title: 'Perinatoloji El Kitabı', type: 'KITAP', author: 'Prof. Dr. Meral Saraçoğlu', description: 'Yüksek riskli gebelik yönetimi ve fetal izlem protokolleri.' },
+      { title: 'Minimal İnvaziv Jinekolojik Cerrahi', type: 'YAYIN', author: 'Doç. Dr. Ahmet Kaya', description: 'Histeroskopi, laparoskopi ve robotik cerrahi uygulamaları.' },
+    ]},
+    { kategoriSlug: 'kalp-damar-cerrahisi', items: [
+      { title: 'Aort Cerrahisi Güncel Yaklaşımlar', type: 'KITAP', author: 'Prof. Dr. Osman Tansel', description: 'Açık ve endovasküler aort cerrahisi teknikleri ve sonuçları.' },
+      { title: 'Koroner Bypass Cerrahisi Rehberi', type: 'YAYIN', author: 'Doç. Dr. Volkan Yüksel', description: 'KABG teknik seçimi, greft korunması ve perioperatif bakım.' },
     ]},
     { kategoriSlug: 'kardiyoloji', items: [
       { title: 'Akut Koroner Sendrom Yönetimi', type: 'KITAP', author: 'BTO Kardiyoloji Kurulu', description: 'AKS tanı ve tedavisinde güncel algoritmalar.' },
       { title: 'Kalp Yetmezliği Tedavi Rehberi 2026', type: 'YAYIN', author: 'BTO STE Komisyonu', description: 'Kronik kalp yetmezliğinde kanıta dayalı tedavi yaklaşımları.' },
+    ]},
+    { kategoriSlug: 'klinik-biyokimya', items: [
+      { title: 'Laboratuvar Tanı Rehberi', type: 'KITAP', author: 'Prof. Dr. Osman Değer', description: 'Biyokimyasal parametrelerin klinik yorumlanması ve tuzaklar.' },
+      { title: 'Kardiyak Biyobelirteçler Güncel Kullanım', type: 'YAYIN', author: 'Doç. Dr. Sema Ünlüer', description: 'Troponin, BNP ve yeni biyobelirteçlerin klinik uygulaması.' },
+    ]},
+    { kategoriSlug: 'klinik-mikrobiyoloji', items: [
+      { title: 'Antimikrobiyal Direnç Yönetimi', type: 'KITAP', author: 'Prof. Dr. Beyza Ener', description: 'MRSA, VRE, KPC ve diğer dirençli mikroorganizma kontrolü.' },
+      { title: 'Moleküler Mikrobiyoloji Tanı Yöntemleri', type: 'YAYIN', author: 'Doç. Dr. Nihal Akçay', description: 'PCR, NGS ve hızlı tanı testlerinin klinik laboraturvarda kullanımı.' },
+    ]},
+    { kategoriSlug: 'kulak-burun-bogaz', items: [
+      { title: 'KBB Cerrahisi Temel Eğitim Atlası', type: 'KITAP', author: 'Prof. Dr. Orhan Özturan', description: 'Septoplasti, tonsillektomi ve endoskopik sinüs cerrahisi teknikleri.' },
+      { title: 'İşitme Kayıpları ve Rehabilitasyon', type: 'YAYIN', author: 'Doç. Dr. Bülent Şerbetçioğlu', description: 'Sensörinöral işitme kaybında tanı ve implant seçimi.' },
+    ]},
+    { kategoriSlug: 'noroloji', items: [
+      { title: 'İnme Yönetimi Güncel Rehber 2026', type: 'KITAP', author: 'Prof. Dr. Şule Özbilen Acar', description: 'İskemik ve hemorajik inme akut tedavi ve ikincil korunma.' },
+      { title: 'Multipl Skleroz Tedavi Algoritması', type: 'YAYIN', author: 'Doç. Dr. Yaşar Kütükçü', description: 'MS hastalık modifiye edici tedaviler güncel kılavuz.' },
+    ]},
+    { kategoriSlug: 'norosirurji', items: [
+      { title: 'Spinal Cerrahi Endikasyon Rehberi', type: 'KITAP', author: 'Prof. Dr. Gökmen Kahiloğulları', description: 'Disk hernisi, spinal stenoz ve stabilizasyon cerrahisi.' },
+      { title: 'Beyin Tümörleri Multidisipliner Yaklaşım', type: 'YAYIN', author: 'Doç. Dr. Murat Akar', description: 'Gliomalar, meninjiomlar ve metastazlarda cerrahi ve ek tedaviler.' },
+    ]},
+    { kategoriSlug: 'nukleer-tip', items: [
+      { title: 'PET/CT Klinik Uygulamalar Rehberi', type: 'KITAP', author: 'Prof. Dr. Mehmet Erdoğan', description: 'Onkoloji, kardiyoloji ve nörolojide PET/CT yorumlama.' },
+      { title: 'Radyoiyot Tedavisi Protokolleri', type: 'YAYIN', author: 'Doç. Dr. Ayşen Berk', description: 'Tiroid kanseri ve hipertiroidide I-131 tedavisi.' },
+    ]},
+    { kategoriSlug: 'ortopedi', items: [
+      { title: 'Diz ve Kalça Artroplastisi Rehberi', type: 'KITAP', author: 'Prof. Dr. Reha Tandoğan', description: 'Total protez cerrahisinde endikasyon, teknik ve komplikasyon.' },
+      { title: 'Spor Yaralanmaları Tedavi Protokolleri', type: 'YAYIN', author: 'Doç. Dr. Muzaffer Sindel', description: 'ACL, menisküs ve Achilles yaralanmalarında güncel tedavi.' },
+    ]},
+    { kategoriSlug: 'patoloji', items: [
+      { title: 'Kanser Patolojisi Tanı Rehberi', type: 'KITAP', author: 'Prof. Dr. Nesrin Uğraş', description: 'Meme, kolon ve akciğer kanserlerinin histopatolojik tanısı.' },
+      { title: 'Dijital Patoloji ve Yapay Zeka', type: 'YAYIN', author: 'Doç. Dr. Sema Hücümenoğlu', description: 'Dijital görüntüleme sistemleri ve AI destekli tanı araçları.' },
+    ]},
+    { kategoriSlug: 'plastik-cerrahi', items: [
+      { title: 'Yanık Tedavisi Protokolleri', type: 'KITAP', author: 'Prof. Dr. Ufuk Emekli', description: 'Yanık resüsitasyonu, debritman ve greftleme teknikleri.' },
+      { title: 'Rekonstrüktif Mikrocerrahi Atlası', type: 'YAYIN', author: 'Doç. Dr. Erhan Ece', description: 'Flap seçimi ve serbest doku transferi teknikleri.' },
+    ]},
+    { kategoriSlug: 'psikiyatri', items: [
+      { title: 'Psikiyatrik Aciller Yönetim Rehberi', type: 'KITAP', author: 'Prof. Dr. Hüseyin Güleç', description: 'İntihar girişimi, ajitasyon ve psikotik kriz yönetimi.' },
+      { title: 'Biyolojik Psikiyatri Tedaviler 2026', type: 'YAYIN', author: 'Doç. Dr. Ayşegül Özel', description: 'Antipsikotik, antidepresan ve duygudurum düzenleyici güncel kılavuz.' },
+    ]},
+    { kategoriSlug: 'radyasyon-onkolojisi', items: [
+      { title: 'Stereotaktik Radyoterapi Rehberi', type: 'KITAP', author: 'Prof. Dr. Sedat Koca', description: 'SBRT/SRS teknikleri, doz sınırları ve klinik uygulamalar.' },
+      { title: 'Radyoterapi Yan Etkileri Yönetimi', type: 'YAYIN', author: 'Doç. Dr. Murat Dinçer', description: 'Akut ve kronik radyasyon toksisitesi önleme ve tedavi.' },
+    ]},
+    { kategoriSlug: 'radyoloji', items: [
+      { title: 'Girişimsel Radyoloji El Kitabı', type: 'KITAP', author: 'Prof. Dr. Ahmet Mesut Onat', description: 'Biyopsi, drenaj, embolizasyon ve ablasyon prosedürleri.' },
+      { title: 'MR Görüntüleme Atlası — Nöroanatomi', type: 'YAYIN', author: 'Doç. Dr. Işıl Başara', description: 'Beyin MR anatomisi ve sık patolojik bulgular.' },
+    ]},
+    { kategoriSlug: 'uroloji', items: [
+      { title: 'Ürolojik Onkoloji Rehberi', type: 'KITAP', author: 'Prof. Dr. Ertuğrul Şefik', description: 'Prostat, mesane ve böbrek kanserlerinde güncel tedavi algoritmaları.' },
+      { title: 'Robotik Üroloji Cerrahisi', type: 'YAYIN', author: 'Doç. Dr. Cem Akbal', description: 'Robotik radikal prostatektomi ve nefroüroektomi teknikleri.' },
+    ]},
+    { kategoriSlug: 'anatomi', items: [
+      { title: 'Klinik Anatomi Atlası', type: 'KITAP', author: 'Prof. Dr. Ömer Faruk Gökalp', description: 'Cerrahi girişimler için anatomik yapılar ve landmark\'lar.' },
+      { title: 'Ultrason Anatomisi Rehberi', type: 'YAYIN', author: 'Doç. Dr. Selda Demirci', description: 'Kas-iskelet ve damar anatomisinin ultrasonografik değerlendirilmesi.' },
+    ]},
+    { kategoriSlug: 'biyoistatistik', items: [
+      { title: 'Klinik Araştırma Tasarımı El Kitabı', type: 'KITAP', author: 'Prof. Dr. Necdet Süt', description: 'Randomize kontrollü çalışma, kohort ve meta-analiz metodolojisi.' },
+      { title: 'SPSS ile Biyoistatistik Uygulamaları', type: 'YAYIN', author: 'Doç. Dr. Güzin Zeren Öztürk', description: 'Klinik veri analizi için pratik istatistik rehberi.' },
+    ]},
+    { kategoriSlug: 'tip-tarihi-deontoloji', items: [
+      { title: 'Hekimlik Etiği Vaka Kitabı', type: 'KITAP', author: 'Prof. Dr. Şükrü Öztürk', description: 'Onam, gizlilik, hasta özerkliği ve çıkar çatışması vaka incelemeleri.' },
+      { title: 'Tıp Hukuku Temel Kavramlar', type: 'YAYIN', author: 'Dr. Ahmet Yılmaz', description: 'Malpraktis, advers olay bildirimi ve hekimin hukuki sorumluluğu.' },
     ]},
   ]
 

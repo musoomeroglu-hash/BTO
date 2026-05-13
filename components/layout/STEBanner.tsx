@@ -9,10 +9,17 @@ export default async function STEBanner() {
   if (activeRow?.value !== 'true') return null
   if (!textRow?.value) return null
 
+  const text = textRow.value
+
   return (
     <div className="ste-banner">
-      <div className="ste-banner-inner">
-        <p>{textRow.value}</p>
+      <div className="ste-banner-track">
+        <span className="ste-banner-text">{text}</span>
+        <span className="ste-banner-sep" aria-hidden>✦</span>
+        <span className="ste-banner-text" aria-hidden>{text}</span>
+        <span className="ste-banner-sep" aria-hidden>✦</span>
+        <span className="ste-banner-text" aria-hidden>{text}</span>
+        <span className="ste-banner-sep" aria-hidden>✦</span>
       </div>
     </div>
   )

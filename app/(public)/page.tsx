@@ -7,7 +7,7 @@ import QuizSection from '@/components/sections/QuizSection'
 import ScrollReveal from '@/components/ScrollReveal'
 
 async function getHomeData() {
-  const [haberler, etkinlikler, quiz, yayinlar, ykUyeleri] = await Promise.all([
+  const [haberler, etkinlikler, quiz, yayinlar, ykUyeleri, steKategoriler] = await Promise.all([
     prisma.haber.findMany({
       where: { published: true },
       orderBy: { publishedAt: 'desc' },
@@ -30,8 +30,13 @@ async function getHomeData() {
       orderBy: { order: 'asc' },
       take: 5,
     }),
+    prisma.steKategori.findMany({
+      where: { active: true },
+      orderBy: { order: 'asc' },
+      include: { _count: { select: { materyaller: true } } },
+    }),
   ])
-  return { haberler, etkinlikler, quiz, yayinlar, ykUyeleri }
+  return { haberler, etkinlikler, quiz, yayinlar, ykUyeleri, steKategoriler }
 }
 
 function formatDate(d: Date | string) {
@@ -43,11 +48,60 @@ function formatEventDate(d: Date | string) {
 }
 
 export default async function HomePage() {
-  const { haberler, etkinlikler, quiz, yayinlar, ykUyeleri } = await getHomeData()
+  const { haberler, etkinlikler, quiz, yayinlar, ykUyeleri, steKategoriler } = await getHomeData()
+
+  const steAlphabet = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ'.split('')
+  const steByLetter: Record<string, boolean> = {}
+  steKategoriler.forEach(k => {
+    steByLetter[k.name.charAt(0).toLocaleUpperCase('tr-TR')] = true
+  })
+  const featuredSte = steKategoriler.slice(0, 3)
 
   return (
     <>
       <HeroSection />
+
+      {/* STE Portal A-Z Bölümü */}
+      <section className="home-ste-section">
+        <div className="section-inner">
+          <div className="home-ste-header">
+            <div>
+              <div className="section-label">SÜREKLİ TIP EĞİTİMİ</div>
+              <h2 className="section-heading">STE Portalı — Branşınızı Keşfedin</h2>
+            </div>
+            <Link href="/ste" className="btn-outlined" style={{flexShrink:0}}>Tüm Portal →</Link>
+          </div>
+
+          {/* A-Z Bar */}
+          <div className="home-ste-az-bar">
+            {steAlphabet.map(letter => (
+              <Link
+                key={letter}
+                href={steByLetter[letter] ? `/ste#letter-${letter}` : '/ste'}
+                className={`home-ste-az-btn${steByLetter[letter] ? ' active' : ' disabled'}`}
+                tabIndex={steByLetter[letter] ? 0 : -1}
+              >
+                {letter}
+              </Link>
+            ))}
+          </div>
+
+          {/* 3 Öne Çıkan Kategori Kartı */}
+          <div className="home-ste-cards">
+            {featuredSte.map(k => (
+              <Link href={`/ste/${k.slug}`} key={k.id} className="home-ste-card">
+                <div className="home-ste-card-icon">{k.iconEmoji || '📋'}</div>
+                <div className="home-ste-card-body">
+                  <h3>{k.name}</h3>
+                  {k.description && <p>{k.description.length > 90 ? k.description.slice(0, 90) + '…' : k.description}</p>}
+                  <span className="home-ste-card-count">📚 {k._count.materyaller} materyal</span>
+                </div>
+                <span className="home-ste-card-arrow">→</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Sıcak Gündem */}
       <ScrollReveal>

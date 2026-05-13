@@ -2383,6 +2383,123 @@ img { max-width: 100%; }
 
 .ste-back-band { background: var(--light-bg); padding: 48px 48px; }
 
+/* ── HOME STE SECTION ── */
+.home-ste-section {
+  background: var(--white);
+  padding: 64px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.home-ste-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.home-ste-az-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 36px;
+}
+.home-ste-az-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--sans);
+  background: var(--light-bg);
+  color: var(--gray);
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+  pointer-events: none;
+}
+.home-ste-az-btn.active {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  pointer-events: auto;
+  cursor: pointer;
+}
+.home-ste-az-btn.active:hover {
+  background: var(--red-dark);
+  border-color: var(--red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(210,35,42,0.3);
+}
+.home-ste-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.home-ste-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.home-ste-card:hover {
+  border-color: var(--red);
+  background: var(--white);
+  box-shadow: 0 4px 20px rgba(210,35,42,0.1);
+  transform: translateY(-2px);
+}
+.home-ste-card-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.home-ste-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.home-ste-card-body h3 {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.home-ste-card-body p {
+  font-size: 12px;
+  color: var(--body);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.home-ste-card-count {
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 500;
+}
+.home-ste-card-arrow {
+  font-size: 18px;
+  color: var(--red);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.home-ste-card:hover .home-ste-card-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
 /* ── NAV SEARCH ── */
 .nav-search { margin-left: auto; flex-shrink: 0; }
 .nav-search form {
@@ -2420,21 +2537,39 @@ img { max-width: 100%; }
 }
 .nav-search button:hover { color: var(--red); }
 
-/* ── STE BANNER ── */
+/* ── STE BANNER TICKER ── */
 .ste-banner {
   background: var(--red);
   color: var(--white);
-  text-align: center;
-  padding: 8px 24px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 9px 0;
+  position: relative;
+  z-index: 101;
+}
+.ste-banner-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  animation: ste-ticker 30s linear infinite;
+  will-change: transform;
+}
+.ste-banner-text {
   font-size: 13px;
   font-weight: 500;
   font-family: var(--sans);
-  position: relative;
-  z-index: 101;
-  line-height: 1.4;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
 }
-.ste-banner-inner { max-width: var(--max); margin: 0 auto; }
-.ste-banner p { margin: 0; }
+.ste-banner-sep {
+  font-size: 10px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+@keyframes ste-ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
 
 /* ── SCROLL REVEAL ── */
 .scroll-reveal {
@@ -2483,6 +2618,8 @@ img { max-width: 100%; }
   .ste-materyal-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 900px) {
+  .home-ste-cards { grid-template-columns: 1fr; }
+  .home-ste-header { flex-direction: column; align-items: flex-start; }
   .gundem-grid { grid-template-columns: repeat(2, 1fr); }
   .cards-layout { grid-template-columns: 1fr; }
   .card-large { grid-row: auto; }

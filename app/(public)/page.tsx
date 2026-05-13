@@ -4,13 +4,14 @@ import { prisma } from '@/lib/prisma'
 import HeroSection from '@/components/sections/Hero'
 import EBultenSection from '@/components/sections/EBulten'
 import QuizSection from '@/components/sections/QuizSection'
+import ScrollReveal from '@/components/ScrollReveal'
 
 async function getHomeData() {
   const [haberler, etkinlikler, quiz, yayinlar, ykUyeleri] = await Promise.all([
     prisma.haber.findMany({
       where: { published: true },
       orderBy: { publishedAt: 'desc' },
-      take: 8,
+      take: 3,
       include: { author: { select: { name: true } } },
     }),
     prisma.etkinlik.findMany({
@@ -43,8 +44,6 @@ function formatEventDate(d: Date | string) {
 
 export default async function HomePage() {
   const { haberler, etkinlikler, quiz, yayinlar, ykUyeleri } = await getHomeData()
-  const featuredHaber = haberler[0]
-  const sideHaberler = haberler.slice(1, 3)
 
   return (
     <>
@@ -61,44 +60,39 @@ export default async function HomePage() {
       </section>
 
       {/* Sıcak Gündem */}
-      <section className="sicak-gundem">
-        <div className="section-inner">
-          <div className="section-label">SICAK GÜNDEM</div>
-          <h2 className="section-heading" style={{color:'var(--white)'}}>Bilimden etkinliklere, her şey burada</h2>
-          <div className="gundem-grid">
-            {featuredHaber && (
-              <div className="gundem-card gundem-main">
-                {featuredHaber.imageUrl ? (
-                  <img src={featuredHaber.imageUrl} alt={featuredHaber.title} className="gundem-card-img"/>
-                ) : (
-                  <div className="gundem-card-img-placeholder" style={{background:'linear-gradient(135deg,#3a3a5c,#1a1a3a)'}}/>
-                )}
-                <div className="gundem-card-body">
-                  <span className="card-badge">Sizin için güncel haberler.</span>
-                  <h3>{featuredHaber.title}</h3>
-                  {featuredHaber.excerpt && <p>{featuredHaber.excerpt}</p>}
-                  <Link href={`/haberler/${featuredHaber.slug}`} className="card-link-btn">Devamını Oku →</Link>
-                </div>
-              </div>
-            )}
-            <div className="gundem-side">
-              {sideHaberler.map(h => (
-                <div key={h.id} className="gundem-card gundem-small">
+      <ScrollReveal>
+        <section className="sicak-gundem">
+          <div className="section-inner">
+            <div className="section-label">SICAK GÜNDEM</div>
+            <h2 className="section-heading" style={{color:'var(--white)'}}>Bilimden etkinliklere, her şey burada</h2>
+            <div className="gundem-grid">
+              {haberler.map(h => (
+                <div key={h.id} className="gundem-card gundem-equal">
+                  {h.imageUrl ? (
+                    <img src={h.imageUrl} alt={h.title} className="gundem-card-img"/>
+                  ) : (
+                    <div className="gundem-card-img-placeholder" style={{background:'linear-gradient(135deg,#3a3a5c,#1a1a3a)'}}/>
+                  )}
                   <div className="gundem-card-body">
-                    <h4>{h.title}</h4>
-                    <Link href={`/haberler/${h.slug}`} className="card-link-btn small">Devamını Oku →</Link>
+                    <span className="card-badge">{h.category === 'BASIN_ACIKLAMASI' ? 'Basın Açıklaması' : 'Haber'}</span>
+                    <h3>{h.title}</h3>
+                    {h.excerpt && <p>{h.excerpt}</p>}
+                    <Link href={`/haberler/${h.slug}`} className="card-link-btn">Devamını Oku →</Link>
                   </div>
                 </div>
               ))}
             </div>
+            <div style={{textAlign:'center', marginTop: 32}}>
+              <Link href="/haberler" className="btn-outlined">Tüm Haberleri Gör →</Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
-      <EBultenSection />
+      <ScrollReveal><EBultenSection /></ScrollReveal>
 
       {/* Etkinlikler */}
-      <section className="etkinlikler-section">
+      <ScrollReveal><section className="etkinlikler-section">
         <div className="section-inner">
           <div className="section-label">ETKİNLİKLER</div>
           <div className="section-header-row">
@@ -121,11 +115,11 @@ export default async function HomePage() {
             )}
           </div>
         </div>
-      </section>
+      </section></ScrollReveal>
 
       {/* Hekimce Bakış */}
       {yayinlar.length > 0 && (
-        <section className="hekimce-section">
+        <ScrollReveal><section className="hekimce-section">
           <div className="section-inner">
             <div className="section-label">HEKİMCE BAKIŞ</div>
             <h2 className="section-heading">Dergimizin son sayısından öne çıkan yazılar</h2>
@@ -146,13 +140,13 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
-        </section>
+        </section></ScrollReveal>
       )}
 
-      {quiz && <QuizSection quiz={quiz} />}
+      {quiz && <ScrollReveal><QuizSection quiz={quiz} /></ScrollReveal>}
 
       {/* Hakkımızda */}
-      <section className="hakkimizda-section">
+      <ScrollReveal><section className="hakkimizda-section">
         <div className="section-inner">
           <div className="hakkimizda-grid">
             <div className="hakkimizda-text">
@@ -191,25 +185,27 @@ export default async function HomePage() {
             </div>
           )}
         </div>
-      </section>
+      </section></ScrollReveal>
 
       {/* Topluluğa Katıl */}
-      <section className="community-section">
-        <div className="section-inner">
-          <div className="community-card">
-            <div className="sphere sphere-red" style={{width:120,height:120,top:-30,right:80,opacity:.9}}/>
-            <div className="sphere sphere-pink" style={{width:80,height:80,bottom:-20,right:20,opacity:.8}}/>
-            <div className="community-content">
-              <h2>Topluluğumuza Katılın</h2>
-              <p>Bursa Tabip Odası üyesi olarak mesleki haklarınızı güvence altına alın, eğitim olanaklarından yararlanın ve sağlık politikalarının şekillenmesinde söz sahibi olun.</p>
-              <Link href="/uyelik" className="community-btn">Keşfet →</Link>
-            </div>
-            <div className="community-photo">
-              <img src="/images/topluluk.png" alt="Topluluğa Katıl" style={{width:'100%',height:'100%',objectFit:'cover',borderRadius:'50%'}} />
+      <ScrollReveal>
+        <section className="community-section">
+          <div className="section-inner">
+            <div className="community-card">
+              <div className="sphere sphere-red" style={{width:120,height:120,top:-30,right:80,opacity:.9}}/>
+              <div className="sphere sphere-pink" style={{width:80,height:80,bottom:-20,right:20,opacity:.8}}/>
+              <div className="community-content">
+                <h2>Topluluğumuza Katılın</h2>
+                <p>Bursa Tabip Odası üyesi olarak mesleki haklarınızı güvence altına alın, eğitim olanaklarından yararlanın ve sağlık politikalarının şekillenmesinde söz sahibi olun.</p>
+                <Link href="/uyelik" className="community-btn">Keşfet →</Link>
+              </div>
+              <div className="community-photo">
+                <img src="/images/topluluk.png" alt="Topluluğa Katıl" style={{width:'100%',height:'100%',objectFit:'cover',borderRadius:'50%'}} />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
     </>
   )
 }

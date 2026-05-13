@@ -45,6 +45,9 @@ export default async function YayinlarPage({ searchParams }: { searchParams: Pro
                 {y.issueNumber && <span className="card-badge" style={{marginBottom:8,display:'inline-block'}}>Sayı {y.issueNumber}</span>}
                 <h3 style={{fontFamily:'var(--serif)',fontSize:16,fontWeight:700,marginBottom:8,lineHeight:1.4}}>{y.title}</h3>
                 <p style={{fontSize:12,color:'var(--gray)',marginBottom:12}}>{new Date(y.publishedAt).toLocaleDateString('tr-TR',{month:'long',year:'numeric'})}</p>
+                {y.content && (
+                  <div className="yayin-content" dangerouslySetInnerHTML={{ __html: y.content }} style={{fontSize:13,color:'var(--body)',lineHeight:1.6,marginBottom:12}}/>
+                )}
                 {y.fileUrl && (
                   <a href={y.fileUrl} target="_blank" rel="noopener" className="btn-outlined" style={{fontSize:12,padding:'6px 16px'}}>PDF İndir</a>
                 )}

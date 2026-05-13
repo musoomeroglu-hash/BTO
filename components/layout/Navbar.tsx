@@ -69,14 +69,6 @@ export default function Navbar() {
           </div>
 
           <div className="nav-item">
-            <div className="nav-link">Mevzuat {chevron}</div>
-            <div className="dropdown">
-              <Link href="/mevzuat?kategori=Asgari Ücret">Asgari Ücret Katsayıları</Link>
-              <Link href="/mevzuat">Mevzuat</Link>
-            </div>
-          </div>
-
-          <div className="nav-item">
             <div className="nav-link">Yayınlarımız {chevron}</div>
             <div className="dropdown">
               <Link href="/yayinlar?tip=DERGI">Hekimce Bakış Dergisi</Link>
@@ -102,6 +94,17 @@ export default function Navbar() {
           </div>
 
           <Link href="/iletisim" className="nav-link">İletişim</Link>
+
+          <div className="nav-search">
+            <form action="/haberler" method="get">
+              <input type="text" name="q" placeholder="Ara…" />
+              <button type="submit" aria-label="Ara">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+              </button>
+            </form>
+          </div>
         </div>
 
         <button className="hamburger" aria-label="Menü" onClick={() => setMobileOpen(true)}>
@@ -126,8 +129,7 @@ export default function Navbar() {
         <div className="mobile-section-title">Komisyonlar</div>
         <Link href="/komisyonlar" onClick={() => setMobileOpen(false)}>Tüm Komisyonlar</Link>
         <div className="mobile-section-title">Diğer</div>
-        <Link href="/mevzuat" onClick={() => setMobileOpen(false)}>Mevzuat</Link>
-        <Link href="/yayinlar" onClick={() => setMobileOpen(false)}>Yayınlarımız</Link>
+<Link href="/yayinlar" onClick={() => setMobileOpen(false)}>Yayınlarımız</Link>
         <Link href="/basin-aciklamalari" onClick={() => setMobileOpen(false)}>Basın Açıklamaları</Link>
         <div className="mobile-section-title">Eğitim</div>
         <Link href="/ste" onClick={() => setMobileOpen(false)} style={{color:'var(--red)',fontWeight:600}}>🎓 STE Portalı</Link>

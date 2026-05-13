@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
   if (!session || !can(session.user.role, 'yayin:manage')) return NextResponse.json({ error: 'Yetkisiz' }, { status: 403 })
   const body = await req.json()
   const item = await prisma.yayin.create({
-    data: { title: body.title, type: body.type, description: body.description || null, fileUrl: body.fileUrl || null, coverUrl: body.coverUrl || null, issueNumber: body.issueNumber ?? null, publishedAt: new Date(body.publishedAt || Date.now()) },
+    data: { title: body.title, type: body.type, description: body.description || null, content: body.content || null, fileUrl: body.fileUrl || null, coverUrl: body.coverUrl || null, issueNumber: body.issueNumber ?? null, publishedAt: new Date(body.publishedAt || Date.now()) },
   })
   return NextResponse.json(item, { status: 201 })
 }

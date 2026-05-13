@@ -12,6 +12,8 @@ const defaultSettings = [
   { key:'social_facebook', label:'Facebook URL', value:'' },
   { key:'social_linkedin', label:'LinkedIn URL', value:'' },
   { key:'social_youtube', label:'YouTube URL', value:'' },
+  { key:'ste_banner_text', label:'STE Banner Metni', value:'' },
+  { key:'ste_banner_active', label:'STE Banner Aktif', value:'false' },
 ]
 
 export default function AdminAyarlarPage() {
@@ -41,6 +43,7 @@ export default function AdminAyarlarPage() {
     { title:'Genel Ayarlar', keys:['site_title','site_description'] },
     { title:'İletişim Bilgileri', keys:['contact_address','contact_phone','contact_email'] },
     { title:'Sosyal Medya', keys:['social_instagram','social_twitter','social_facebook','social_linkedin','social_youtube'] },
+    { title:'STE Duyuru Bandı', keys:['ste_banner_text','ste_banner_active'] },
   ]
 
   return (
@@ -58,7 +61,12 @@ export default function AdminAyarlarPage() {
             return (
               <div key={key} className="form-group">
                 <label className="form-label">{s.label}</label>
-                {key === 'site_description' || key === 'contact_address' ? (
+                {key === 'ste_banner_active' ? (
+                  <label style={{display:'flex',alignItems:'center',gap:8,cursor:'pointer',paddingTop:4}}>
+                    <input type="checkbox" checked={s.value === 'true'} onChange={e=>set(key, e.target.checked ? 'true' : 'false')} style={{width:16,height:16}}/>
+                    <span style={{fontSize:14}}>Aktif</span>
+                  </label>
+                ) : key === 'site_description' || key === 'contact_address' || key === 'ste_banner_text' ? (
                   <textarea className="form-textarea" rows={3} value={s.value} onChange={e=>set(key,e.target.value)}/>
                 ) : (
                   <input className="form-input" value={s.value} onChange={e=>set(key,e.target.value)}/>

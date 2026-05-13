@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Bursa Tabip Odası — Hekimlerin Sesi, Toplumun Güvencesi',
-  description: 'Bursa Tabip Odası resmi web sitesi. Sağlık haberleri, etkinlikler, komisyonlar ve üyelik bilgileri.',
-  keywords: 'Bursa Tabip Odası, BTO, hekimler, sağlık, tıp',
+  title: 'Sürekli Tıp Eğitimi — Bursa Tabip Odası',
+  description: 'Bursa Tabip Odası Sürekli Tıp Eğitimi Portalı. Sağlık haberleri, etkinlikler, komisyonlar ve üyelik bilgileri.',
+  keywords: 'Sürekli Tıp Eğitimi, STE, Bursa Tabip Odası, BTO, hekimler, sağlık, tıp',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

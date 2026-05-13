@@ -39,7 +39,6 @@ export default function Header() {
         <div className="header-actions">
           <Link href="/haberler" className="btn-outline">Haberler</Link>
           <Link href="/uyelik" className="btn-outline">Üyelik</Link>
-          <Link href="/admin/giris" className="btn-outline">Giriş Yap</Link>
         </div>
 
         <button className="hamburger" id="hamburgerBtn" aria-label="Menü" onClick={() => {

@@ -135,6 +135,7 @@ model Yayin {
   title       String
   type        String   @default("DERGI")
   description String?
+  content     String?
   fileUrl     String?
   coverUrl    String?
   issueNumber Int?

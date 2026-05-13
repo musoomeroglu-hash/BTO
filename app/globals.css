@@ -2388,15 +2388,14 @@ img { max-width: 100%; }
 .nav-search form {
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: var(--light-bg);
+  border: 1px solid var(--border);
   border-radius: 999px;
   overflow: hidden;
   transition: border-color 0.2s;
 }
 .nav-search form:focus-within {
-  border-color: rgba(255,255,255,0.6);
-  background: rgba(255,255,255,0.25);
+  border-color: var(--red);
 }
 .nav-search input {
   border: none;
@@ -2404,22 +2403,22 @@ img { max-width: 100%; }
   padding: 5px 12px;
   font-size: 13px;
   font-family: var(--sans);
-  color: var(--white);
+  color: var(--text);
   width: 130px;
   outline: none;
 }
-.nav-search input::placeholder { color: rgba(255,255,255,0.6); }
+.nav-search input::placeholder { color: var(--gray); }
 .nav-search button {
   background: none;
   border: none;
   cursor: pointer;
   padding: 5px 10px;
-  color: rgba(255,255,255,0.7);
+  color: var(--gray);
   display: flex;
   align-items: center;
   transition: color 0.2s;
 }
-.nav-search button:hover { color: var(--white); }
+.nav-search button:hover { color: var(--red); }
 
 /* ── STE BANNER ── */
 .ste-banner {

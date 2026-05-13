@@ -49,16 +49,6 @@ export default async function HomePage() {
     <>
       <HeroSection />
 
-      {/* Sign-in Band */}
-      <section className="signin-band">
-        <div className="sphere sphere-dark-red" style={{width:80,height:80,top:-20,left:-20,opacity:.6}}/>
-        <div className="sphere sphere-pink" style={{width:60,height:60,bottom:-15,right:40,opacity:.7}}/>
-        <div className="signin-band-inner">
-          <p>Hoş geldiniz! Kişiselleştirilmiş bir deneyim için giriş yapın.</p>
-          <Link href="/admin/giris" className="signin-band-btn">Giriş Yap →</Link>
-        </div>
-      </section>
-
       {/* Sıcak Gündem */}
       <ScrollReveal>
         <section className="sicak-gundem">

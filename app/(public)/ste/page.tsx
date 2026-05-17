@@ -4,8 +4,8 @@ import { prisma } from '@/lib/prisma'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Sürekli Tıp Eğitimi Portalı — Bursa Tabip Odası',
-  description: 'Bursa Tabip Odası Sürekli Tıp Eğitimi (STE) Portalı. Uzmanlık alanlarına göre eğitim materyalleri, kurul bilgileri ve güncel yayınlara erişin.',
+  title: 'STE Yayınları — Bursa Tabip Odası',
+  description: 'Bursa Tabip Odası STE Yayınları. Uzmanlık alanlarına göre eğitim materyalleri, kurul bilgileri ve güncel yayınlara erişin.',
 }
 
 async function getSTEData() {
@@ -50,9 +50,9 @@ export default async function STEPortalPage() {
       <section className="ste-hero">
         <div className="ste-hero-bg" />
         <div className="ste-hero-content">
-          <div className="ste-hero-badge">🎓 SÜREKLİ TIP EĞİTİMİ</div>
-          <h1>Mesleki Eğitim Portalı</h1>
-          <p>Bursa Tabip Odası bünyesindeki tüm uzmanlık alanları, eğitim materyalleri ve kurul bilgilerine tek bir portaldan erişin.</p>
+          <div className="ste-hero-badge">🎓 STE YAYINLARI</div>
+          <h1>STE Yayınları</h1>
+          <p>Bursa Tabip Odası bünyesindeki tüm uzmanlık alanları, eğitim materyalleri ve kurul bilgilerine tek bir yerden erişin.</p>
           <div className="ste-hero-stats">
             <div className="ste-hero-stat">
               <strong>{kategoriler.length}</strong>
@@ -104,7 +104,7 @@ export default async function STEPortalPage() {
               <h3>🤝 Eğitim Faaliyetlerimizi Destekleyin</h3>
               <p>Sürekli tıp eğitimi programlarımızın geliştirilmesine katkıda bulunun.</p>
             </div>
-            <a href="#" className="ste-donate-btn">
+            <a href="/bagis" className="ste-donate-btn">
               Bağış Yap ❤️
             </a>
           </div>

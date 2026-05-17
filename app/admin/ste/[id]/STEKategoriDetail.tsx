@@ -122,7 +122,7 @@ export default function STEKategoriDetail({ kategori }: { kategori: Kategori }) 
     <>
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:24}}>
         <div style={{display:'flex',alignItems:'center',gap:16}}>
-          <Link href="/admin/ste" style={{color:'var(--gray)',fontSize:13}}>← STE Portalı</Link>
+          <Link href="/admin/ste" style={{color:'var(--gray)',fontSize:13}}>← STE Yayınları</Link>
           <h1 style={{marginBottom:0,display:'flex',alignItems:'center',gap:12}}>
             <span style={{fontSize:32}}>{k.iconEmoji || '📋'}</span>
             {k.name}

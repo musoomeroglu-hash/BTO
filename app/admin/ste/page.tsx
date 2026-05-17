@@ -13,7 +13,7 @@ export default async function AdminSTEPage() {
   return (
     <div className="admin-page">
       <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:24}}>
-        <h1 style={{marginBottom:0}}>STE Portalı Yönetimi</h1>
+        <h1 style={{marginBottom:0}}>STE Yayınları Yönetimi</h1>
         <Link href="/admin/ste/yeni" className="admin-btn admin-btn-primary">+ Yeni Kategori</Link>
       </div>
 
@@ -38,7 +38,7 @@ export default async function AdminSTEPage() {
         <div className="admin-card" style={{textAlign:'center',padding:64}}>
           <div style={{fontSize:64,marginBottom:16}}>🎓</div>
           <h3 style={{fontFamily:'var(--serif)',fontSize:24,marginBottom:8}}>Henüz Kategori Yok</h3>
-          <p style={{color:'var(--gray)',marginBottom:24}}>STE Portalı için uzmanlık branşlarını eklemeye başlayın.</p>
+          <p style={{color:'var(--gray)',marginBottom:24}}>STE Yayınları için uzmanlık branşlarını eklemeye başlayın.</p>
           <Link href="/admin/ste/yeni" className="admin-btn admin-btn-primary">+ İlk Kategoriyi Oluştur</Link>
         </div>
       )}

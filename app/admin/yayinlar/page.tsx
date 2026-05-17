@@ -88,6 +88,7 @@ export default function AdminYayinlarPage() {
               <option value="DERGI">Hekimce Bakış (Dergi)</option>
               <option value="BROSUR">Broşür</option>
               <option value="AFIS">Afiş</option>
+              <option value="VIDEO">Video Eğitimleri</option>
             </select>
           </div>
           {form.type === 'DERGI' && <div className="form-group"><label className="form-label">Sayı No</label><input className="form-input" type="number" value={form.issueNumber} onChange={e=>set('issueNumber',e.target.value)}/></div>}

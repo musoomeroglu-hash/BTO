@@ -66,6 +66,35 @@ img { max-width: 100%; }
   align-items: center;
   gap: 20px;
 }
+.header-inner--centered {
+  justify-content: center;
+}
+.header-title-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  gap: 2px;
+}
+.header-site-title {
+  font-family: var(--sans);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text);
+  line-height: 1.1;
+}
+.header-site-sub {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+.nav-inner--centered {
+  justify-content: center;
+  flex-wrap: nowrap;
+}
 .logo-wrap {
   display: flex;
   align-items: center;
@@ -174,7 +203,7 @@ img { max-width: 100%; }
   background: transparent;
   position: relative;
   z-index: 200;
-  padding: 12px 24px;
+  padding: 12px 0;
 }
 .site-nav.sticky {
   position: fixed;
@@ -183,7 +212,7 @@ img { max-width: 100%; }
   right: 0;
   z-index: 1000;
   background: transparent;
-  padding: 8px 24px;
+  padding: 8px 0;
 }
 .site-nav.sticky .nav-inner {
   background: rgba(255,255,255,0.96);
@@ -2501,75 +2530,271 @@ img { max-width: 100%; }
 }
 
 /* ── NAV SEARCH ── */
-.nav-search { margin-left: auto; flex-shrink: 0; }
-.nav-search form {
+.nav-search {
+  flex-shrink: 0;
+  margin-left: 24px;
   display: flex;
   align-items: center;
-  background: var(--light-bg);
-  border: 1px solid var(--border);
+  flex-direction: row;
+  background: transparent;
   border-radius: 999px;
+  box-shadow: 0 0 0 1.5px rgba(0,0,0,0.22);
+  transition: box-shadow 0.2s;
+  height: 32px;
   overflow: hidden;
-  transition: border-color 0.2s;
 }
-.nav-search form:focus-within {
-  border-color: var(--red);
+.nav-search:focus-within {
+  box-shadow: 0 0 0 2px var(--red);
 }
 .nav-search input {
   border: none;
   background: transparent;
-  padding: 5px 12px;
+  padding: 0 14px 0 4px;
   font-size: 13px;
   font-family: var(--sans);
   color: var(--text);
-  width: 130px;
+  width: 150px;
   outline: none;
+  height: 32px;
+  line-height: 32px;
 }
 .nav-search input::placeholder { color: var(--gray); }
 .nav-search button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px 10px;
-  color: var(--gray);
+  padding: 0 4px 0 10px;
+  color: var(--red);
   display: flex;
   align-items: center;
-  transition: color 0.2s;
+  height: 32px;
+  transition: opacity 0.2s;
 }
-.nav-search button:hover { color: var(--red); }
+.nav-search button:hover { opacity: 0.7; }
 
-/* ── STE BANNER TICKER ── */
-.ste-banner {
+/* ── INFO BAND (sabit kırmızı bant — header üstü ve footer altı) ── */
+.info-band {
   background: var(--red);
-  color: var(--white);
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 9px 0;
-  position: relative;
-  z-index: 101;
-}
-.ste-banner-track {
-  display: inline-flex;
-  align-items: center;
-  gap: 40px;
-  animation: ste-ticker 30s linear infinite;
-  will-change: transform;
-}
-.ste-banner-text {
+  color: #fff;
+  text-align: center;
+  padding: 8px 24px;
   font-size: 13px;
   font-weight: 500;
   font-family: var(--sans);
-  letter-spacing: 0.2px;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 101;
+}
+
+/* ── FOOTER SOCIAL BAND ── */
+.footer-social-band {
+  background: var(--red);
+  color: #fff;
+  padding: 32px 24px;
+  text-align: center;
+}
+.footer-social-band h4 {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+.footer-social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+.footer-social-link:hover { opacity: 0.8; }
+.footer-copyright {
+  background: #1a0000;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 12px 24px;
+  font-size: 12px;
+}
+
+/* ── NAV BAĞIŞ YAP BUTONU ── */
+.nav-donate-btn {
+  background: var(--red);
+  color: #fff !important;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.2s;
+  margin-left: 8px;
+  white-space: nowrap;
+  animation: pulse-donate 2.5s infinite;
+}
+.nav-donate-btn:hover {
+  background: var(--red-dark);
+  transform: scale(1.05);
+}
+@keyframes pulse-donate {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(210,35,42,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(210,35,42,0); }
+}
+
+/* ── STE ARAMA ÇUBUĞU (Ana sayfa) ── */
+.ste-home-search {
+  max-width: 700px;
+  margin: 0 auto 32px;
+  display: flex;
+  border-radius: 50px;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  background: var(--light-bg);
+  transition: border-color 0.2s;
+}
+.ste-home-search:focus-within { border-color: var(--red); }
+.ste-home-search input {
+  flex: 1;
+  padding: 14px 24px;
+  border: none;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 16px;
+  outline: none;
+  color: var(--text);
+}
+.ste-home-search input::placeholder { color: var(--gray); }
+.ste-home-search button {
+  padding: 14px 24px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+.ste-home-search button:hover { background: var(--red-dark); }
+
+/* ── YARARLI BAĞLANTILAR ── */
+.useful-links-section { padding: 64px 0; background: var(--light-bg); }
+.useful-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.useful-link-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.25s;
+  text-decoration: none;
+}
+.useful-link-btn:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ── ETKİNLİK CAROUSEL (Ana sayfa) ── */
+.home-etkinlik-carousel-section { padding: 48px 0; }
+.etkinlik-carousel { margin-bottom: 8px; }
+.etkinlik-carousel-main {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.etkinlik-carousel-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.etkinlik-carousel-main:hover img { transform: scale(1.02); }
+.etkinlik-carousel-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 28px;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  color: #fff;
+}
+.etkinlik-carousel-meta {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+.etkinlik-carousel-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.etkinlik-carousel-thumbs {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+.etkinlik-carousel-thumb {
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+  background: none;
+  padding: 0;
   flex-shrink: 0;
 }
-.ste-banner-sep {
-  font-size: 10px;
-  opacity: 0.7;
+.etkinlik-carousel-thumb.active { border-color: var(--red); }
+.etkinlik-carousel-thumb:hover { border-color: var(--red); }
+
+/* ── BAĞIŞ SAYFASI ── */
+.bagis-iban-card {
+  background: var(--light-bg);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+.bagis-iban-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+}
+.bagis-copy-btn {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--sans);
+  white-space: nowrap;
+  transition: background 0.2s;
   flex-shrink: 0;
 }
-@keyframes ste-ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-33.333%); }
-}
+.bagis-copy-btn:hover { background: var(--red-dark); }
 
 /* ── SCROLL REVEAL ── */
 .scroll-reveal {

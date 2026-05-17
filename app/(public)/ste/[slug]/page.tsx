@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const kategori = await prisma.steKategori.findUnique({ where: { slug } })
   if (!kategori) return { title: 'Bulunamadı' }
   return {
-    title: `${kategori.name} — STE Portalı — Bursa Tabip Odası`,
+    title: `${kategori.name} — STE Yayınları — Bursa Tabip Odası`,
     description: kategori.description || `${kategori.name} uzmanlık alanı eğitim materyalleri ve kurul bilgileri.`,
   }
 }
@@ -39,7 +39,7 @@ export default async function STEKategoriPage({ params }: Props) {
           <nav className="ste-breadcrumb">
             <Link href="/">Ana Sayfa</Link>
             <span>/</span>
-            <Link href="/ste">STE Portalı</Link>
+            <Link href="/ste">STE Yayınları</Link>
             <span>/</span>
             <span>{kategori.name}</span>
           </nav>

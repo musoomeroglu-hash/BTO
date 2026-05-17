@@ -5,6 +5,9 @@ import HeroSection from '@/components/sections/Hero'
 import EBultenSection from '@/components/sections/EBulten'
 import QuizSection from '@/components/sections/QuizSection'
 import ScrollReveal from '@/components/ScrollReveal'
+import EtkinlikCarousel from '@/components/sections/EtkinlikCarousel'
+import STESearchBar from '@/components/sections/STESearchBar'
+import UsefulLinks from '@/components/sections/UsefulLinks'
 
 async function getHomeData() {
   const [haberler, etkinlikler, quiz, yayinlar, ykUyeleri, steKategoriler] = await Promise.all([
@@ -32,7 +35,6 @@ async function getHomeData() {
     }),
     prisma.steKategori.findMany({
       where: { active: true },
-      orderBy: { order: 'asc' },
       include: { _count: { select: { materyaller: true } } },
     }),
   ])
@@ -47,6 +49,16 @@ function formatEventDate(d: Date | string) {
   return new Date(d).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
+// Fisher-Yates shuffle
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
 export default async function HomePage() {
   const { haberler, etkinlikler, quiz, yayinlar, ykUyeleri, steKategoriler } = await getHomeData()
 
@@ -55,21 +67,38 @@ export default async function HomePage() {
   steKategoriler.forEach(k => {
     steByLetter[k.name.charAt(0).toLocaleUpperCase('tr-TR')] = true
   })
-  const featuredSte = steKategoriler.slice(0, 3)
+  const featuredSte = shuffleArray(steKategoriler).slice(0, 3)
 
   return (
     <>
       <HeroSection />
 
-      {/* STE Portal A-Z Bölümü */}
+      {/* Etkinlikler Carousel — Hero'dan hemen sonra */}
+      {etkinlikler.length > 0 && (
+        <ScrollReveal>
+          <section className="home-etkinlik-carousel-section">
+            <div className="section-inner">
+              <div className="section-label">ETKİNLİKLER</div>
+              <div className="section-header-row">
+                <h2 className="section-heading">Yaklaşan Etkinliklerimiz</h2>
+                <Link href="/basin-aciklamalari" className="btn-outlined">Tüm Etkinlikler →</Link>
+              </div>
+              <EtkinlikCarousel etkinlikler={etkinlikler} />
+            </div>
+          </section>
+        </ScrollReveal>
+      )}
+
+      {/* STE Yayınları */}
       <section className="home-ste-section">
         <div className="section-inner">
+          <STESearchBar />
           <div className="home-ste-header">
             <div>
               <div className="section-label">SÜREKLİ TIP EĞİTİMİ</div>
-              <h2 className="section-heading">STE Portalı — Branşınızı Keşfedin</h2>
+              <h2 className="section-heading">STE Yayınları — Branşınızı Keşfedin</h2>
             </div>
-            <Link href="/ste" className="btn-outlined" style={{flexShrink:0}}>Tüm Portal →</Link>
+            <Link href="/ste" className="btn-outlined" style={{flexShrink:0}}>Tüm Yayınlar →</Link>
           </div>
 
           {/* A-Z Bar */}
@@ -86,7 +115,7 @@ export default async function HomePage() {
             ))}
           </div>
 
-          {/* 3 Öne Çıkan Kategori Kartı */}
+          {/* 3 Rastgele Kategori Kartı */}
           <div className="home-ste-cards">
             {featuredSte.map(k => (
               <Link href={`/ste/${k.slug}`} key={k.id} className="home-ste-card">
@@ -103,12 +132,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Sıcak Gündem */}
+      {/* Haberler */}
       <ScrollReveal>
         <section className="sicak-gundem">
           <div className="section-inner">
-            <div className="section-label">SICAK GÜNDEM</div>
-            <h2 className="section-heading" style={{color:'var(--white)'}}>Bilimden etkinliklere, her şey burada</h2>
+            <div className="section-label">HABERLER</div>
+            <h2 className="section-heading" style={{color:'var(--white)'}}>Güncel Haberler</h2>
             <div className="gundem-grid">
               {haberler.map(h => (
                 <div key={h.id} className="gundem-card gundem-equal">
@@ -135,7 +164,7 @@ export default async function HomePage() {
 
       <ScrollReveal><EBultenSection /></ScrollReveal>
 
-      {/* Etkinlikler */}
+      {/* Etkinlikler Grid */}
       <ScrollReveal><section className="etkinlikler-section">
         <div className="section-inner">
           <div className="section-label">ETKİNLİKLER</div>
@@ -147,7 +176,7 @@ export default async function HomePage() {
             {etkinlikler.length > 0 ? etkinlikler.map(e => (
               <Link href={`/etkinlikler/${e.slug}`} key={e.id} className="etkinlik-card">
                 <div className="etkinlik-card-img">
-                  {e.imageUrl ? <img src={e.imageUrl} alt={e.title}/> : <div style={{background:`hsl(${Math.random()*60+200},40%,30%)`,width:'100%',height:'100%'}}/>}
+                  {e.imageUrl ? <img src={e.imageUrl} alt={e.title}/> : <div style={{background:'linear-gradient(135deg,#2a3a6a,#c44)',width:'100%',height:'100%'}}/>}
                 </div>
                 <div className="etkinlik-card-body">
                   <div className="etkinlik-meta">{e.location} · {formatEventDate(e.startDate)}</div>
@@ -196,7 +225,7 @@ export default async function HomePage() {
             <div className="hakkimizda-text">
               <div className="section-label">HAKKIMIZDA</div>
               <h2 className="section-heading">Bilim ile yol alan, hastalar için birleşen</h2>
-              <p>Bursa Tabip Odası, Bursa'daki 3.000'den fazla hekimi temsil eden ve Türk Tabipleri Birliği'ne bağlı meslek kuruluşudur. 1953 yılından bu yana hekimlerin haklarını korumak, tıp etiğini yükseltmek ve toplum sağlığını geliştirmek için çalışmaktayız.</p>
+              <p>Bursa Tabip Odası, Bursa&apos;daki 3.000&apos;den fazla hekimi temsil eden ve Türk Tabipleri Birliği&apos;ne bağlı meslek kuruluşudur. 1953 yılından bu yana hekimlerin haklarını korumak, tıp etiğini yükseltmek ve toplum sağlığını geliştirmek için çalışmaktayız.</p>
               <p style={{marginTop:16}}>Bünyemizdeki 15 komisyon ve seçilmiş yönetim kurulumuzla; eğitim, mevzuat, araştırma ve savunuculuk alanlarında faaliyet gösteriyoruz.</p>
               <Link href="/hakkimizda" className="btn-outlined" style={{marginTop:24,display:'inline-block'}}>Daha Fazla Bilgi →</Link>
             </div>
@@ -231,24 +260,9 @@ export default async function HomePage() {
         </div>
       </section></ScrollReveal>
 
-      {/* Topluluğa Katıl */}
+      {/* Yararlı Bağlantılar */}
       <ScrollReveal>
-        <section className="community-section">
-          <div className="section-inner">
-            <div className="community-card">
-              <div className="sphere sphere-red" style={{width:120,height:120,top:-30,right:80,opacity:.9}}/>
-              <div className="sphere sphere-pink" style={{width:80,height:80,bottom:-20,right:20,opacity:.8}}/>
-              <div className="community-content">
-                <h2>Topluluğumuza Katılın</h2>
-                <p>Bursa Tabip Odası üyesi olarak mesleki haklarınızı güvence altına alın, eğitim olanaklarından yararlanın ve sağlık politikalarının şekillenmesinde söz sahibi olun.</p>
-                <Link href="/uyelik" className="community-btn">Keşfet →</Link>
-              </div>
-              <div className="community-photo">
-                <img src="/images/topluluk.png" alt="Topluluğa Katıl" style={{width:'100%',height:'100%',objectFit:'cover',borderRadius:'50%'}} />
-              </div>
-            </div>
-          </div>
-        </section>
+        <UsefulLinks />
       </ScrollReveal>
     </>
   )
